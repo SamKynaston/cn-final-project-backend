@@ -7,7 +7,14 @@ const app = express()
 
 app.use = (express.json())
 
+const userRouter = require("./users/routes")
+const User = require ("./users/model")
+
+app.use(userRouter)
+
+
 const syncTables = () => {
+    user.sync()
 
 }
 
@@ -22,4 +29,3 @@ app.listen(port, () => {
 
 })
 
-// ifhjgh
