@@ -1,4 +1,5 @@
-const { Sequelize } = require("sequelize");
+const {Sequelize} = require("sequelize") //SQL System
+const connection = new Sequelize(process.env.SQL_URI)
+connection.authenticate()
 
-
-// test
+module.exports = connection
