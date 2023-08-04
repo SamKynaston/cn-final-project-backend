@@ -2,10 +2,17 @@ const { Router } = require("express")
 
 const userRouter = Router()
 
-const { registerUser } = require("./controllers")
+const bodyParser = require("body-parser")
 
-userRouter.post("/users/register",registerUser)
+const jsonParser = bodyParser.json()
+console.log(jsonParser)
 
-module.exports = userRouter
+
+
+const { registerUser, login } = require("./controllers")
+
+userRouter.post("/users/register", registerUser)
+
+module.exports = userRouter, login
 
 
