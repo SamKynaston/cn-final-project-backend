@@ -1,21 +1,23 @@
+// favourite cookies 
+
 const { DataTypes } = require("sequelize")
 const connection = require("../db/connection")
 
-const user = connection.define ("user", {
+const User = connection.define ("User", {
     username: {
         type: DataTypes.STRING,
-        allownull: false,
+        allowNull: false,
         unique: true
 
 
     },
     email: {
         type: DataTypes.STRING, 
-        allownull: false
+        allowNull: false
     },
     password: {
         type: DataTypes.STRING, 
-        allownull: false
+        allowNull: false
     }
 
 
@@ -29,4 +31,5 @@ const user = connection.define ("user", {
 
 )
 
-module.exports = user
+
+module.exports = User
