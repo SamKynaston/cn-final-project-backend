@@ -33,23 +33,17 @@ const registerUser = async (req, res) => {
 
 
 const login = async (req, res) => {
-    try {
-      console.log ("********** Saying hi from the login controller")
+    
 
-        //                 the id we code into the token
-        // this is the one line which will generate the token - a good use of librarites
-      const token = await jwt.sign({id: req.user.id}, process.env.SECRET);
-     // const token = await jwt.sign(1, process.env.SECRET)
-      console.log ("********* token = ", token)
+    try { 
+    
+    
 
-      // res.status(202).json({ message: "success", result });
-
-      res.status(200).json({
+            res.status(200).json({
             message: "success",
             user: {
-              username: req.user.username,
-              email: req.user.email,
-              token:token
+              username: req.body.username,
+              password: req.body.password
             }
           })
         
