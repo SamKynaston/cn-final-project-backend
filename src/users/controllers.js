@@ -58,9 +58,28 @@ const findUser = async(req, res) => {
     }
 }
 
+const updateUser = async(req, res) => {
+    try {
+        const userUpdated = await User.update(
+            {
+                [req.body.updateKey]: req.body.updateValue
+            },
+            {
+                where: {
+                    id:req.authUser.id
+                }
+            }
+        )
+        res.status(201).json({message: `${req.authUser.username}'s ${req.body.updateKey} successfully updated to ${req.body.updateValue}.`, user: userUpdated});
+    } catch (err) {
+        res.status(501).json({ errorMessage: err.message });
+    }
+}
+
 module.exports = {
     registerUser,
     login,
-    findUser
+    findUser,
+    updateUser
 }
 
