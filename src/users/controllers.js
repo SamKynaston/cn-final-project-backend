@@ -76,10 +76,24 @@ const updateUser = async(req, res) => {
     }
 }
 
+const deleteUser = async(req, res) => {
+    try {
+        await User.destroy({
+            where: {
+                id:req.authUser.id
+            }
+        });
+        res.status(201).json({message: `deleted user`});
+    } catch (err) {
+        res.status(501).json({ errorMessage: err.message });
+    }
+}
+
 module.exports = {
     registerUser,
     login,
     findUser,
-    updateUser
+    updateUser,
+    deleteUser
 }
 
