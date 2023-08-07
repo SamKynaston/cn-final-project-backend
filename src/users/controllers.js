@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
         res.status(201).json({
             message: "successfully registered",
             user: {username: req.body.username, email: req.body.email},
-            token: await jwt.sign({id: req.user.id}, process.env.SECRET)
+            token: await jwt.sign({id: user.id}, process.env.SECRET)
         })
 
 
