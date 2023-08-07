@@ -1,15 +1,5 @@
-
-const { Sequelize } = require("sequelize");
-
-const connection = new Sequelize (process.env.MYSQL_URI)
-
+const {Sequelize} = require("sequelize") //SQL System
+const connection = new Sequelize(process.env.SQL_URI)
 connection.authenticate()
 
-console.log("database is working")
-
 module.exports = connection
-
-
-
-
-

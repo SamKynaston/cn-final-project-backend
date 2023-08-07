@@ -10,6 +10,7 @@ const saltRounds = process.env.SALT_ROUNDS
 //next needs to be passed as a parameter so it can be used to call the next function
 const hashPass = async (req, res, next) => {
     try {
+        console.log(req.body)
         // This is where the password is encrypted
         req.body.password = await bcrypt.hash(req.body.password,parseInt(saltRounds))	        
         console.log("Inside hashPass middleware function")
@@ -17,6 +18,7 @@ const hashPass = async (req, res, next) => {
         next()
 
 	    } catch (error) {
+            console.log(error)
 	        res.status(501).json({errorMessage: error.message, error: error})
         
 	}
@@ -61,6 +63,7 @@ const comparePass = async (req, res, next) => {
         console.log("************ PASSWORDS MATCH ************")
         next()  // This will call the login controller -  because it is next in the login route in routes.js
     } catch (error) {
+        console.log(error)
         res.status(501).json({errorMessage: error.message, error: error})
     }
 }
