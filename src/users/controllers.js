@@ -19,16 +19,9 @@ const registerUser = async (req, res) => {
             user: {username: req.body.username, email: req.body.email},
             token: await jwt.sign({id: user.id}, process.env.SECRET)
         })
-
-
     } catch (error) {
-        console.log(error)
-        res.status(501).json ({errorMessage: error.message, error:error})
-
-
+        res.status(501).json ({errorMessage: error.message})
     }
-
-    console.log("??????")
 }
 
 
@@ -41,17 +34,33 @@ const login = async (req, res) => {
             },
             token: await jwt.sign({id: req.user.id}, process.env.SECRET)
         })
-        
     } catch (error) {
-        console.log(error)
-        res.status(501).json({ errorMessage: error.message, error: error });
+        res.status(501).json({ errorMessage: error.message });
     }
+}
 
-    
+const findUser = async(req, res) => {
+    try {
+        let UserFound = await User.findOne({where: req.body})
+
+        if (!UserFound) {throw new Error("User not found")}
+
+        console.log(UserFound)
+
+        res.status(200).json({
+            message: "success",
+            user: {
+                username: UserFound.username
+            },
+        })
+    } catch (err) {
+        res.status(501).json({ errorMessage: err.message });
+    }
 }
 
 module.exports = {
     registerUser,
-    login
+    login,
+    findUser
 }
 
