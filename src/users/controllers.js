@@ -9,6 +9,8 @@ const registerUser = async (req, res) => {
     console.log(req.body)
     try { 
         const user = await User.create ({
+            forename: req.body.forename,
+            surname: req.body.surname,
             username: req.body.username,
             email: req.body.email,
             password: req.body.password
