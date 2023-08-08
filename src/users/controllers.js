@@ -91,11 +91,21 @@ const deleteUser = async(req, res) => {
     }
 }
 
+const findAllUsers = async (req, res) => {
+    try {
+        const users = await User.findAll({where: req.body})
+        res.status(201).json({message: `users found`, body:users});
+    } catch (err) {
+        res.status(501).json({ errorMessage: err.message });
+    }
+}
+
 module.exports = {
     registerUser,
     login,
     findUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    findAllUsers
 }
 
