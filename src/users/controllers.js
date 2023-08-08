@@ -51,9 +51,7 @@ const findUser = async(req, res) => {
 
         res.status(200).json({
             message: "success",
-            user: {
-                username: UserFound.username
-            },
+            user: UserFound,
         })
     } catch (err) {
         res.status(501).json({ errorMessage: err.message });
