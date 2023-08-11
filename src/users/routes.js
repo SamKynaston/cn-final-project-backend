@@ -12,7 +12,7 @@ userRouter.post("/users/login", comparePass, login)
 //Customised
 userRouter.get("/user/find/all", tokenCheck, findAllUsers)
 userRouter.delete("/user/delete", tokenCheck, deleteUser)
-userRouter.patch("/user/edit", tokenCheck, updateUser)
+userRouter.put("/user/edit", tokenCheck, updateUser)
 userRouter.get("/user/find", tokenCheck, findUser)
 
 module.exports = userRouter
