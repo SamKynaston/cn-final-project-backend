@@ -41,12 +41,10 @@ const login = async (req, res) => {
 
 const findUser = async(req, res) => {
     try {
-        let UserFound = await User.findOne({where: req.body})
-
+        let UserFound = await User.findOne({where: req.header("username")})
+        console.log("Hi from findUser. req.body = ", req.body)
         if (!UserFound) {throw new Error("User not found")}
-
         console.log(UserFound)
-
         res.status(200).json({
             message: "success",
             user: UserFound,
@@ -58,16 +56,14 @@ const findUser = async(req, res) => {
 
 const updateUser = async(req, res) => {
     try {
+        const updateKey = req.body.updateKey
+        const updateValue = req.body.updateValue
         const userUpdated = await User.update(
-            {
-                [req.body.updateKey]: req.body.updateValue
-            },
-            {
+            {[updateKey]: updateValue},{
                 where: {
                     id:req.authUser.id
                 }
-            }
-        )
+            })
         res.status(201).json({message: `${req.authUser.username}'s ${req.body.updateKey} successfully updated to ${req.body.updateValue}.`, user: userUpdated});
     } catch (err) {
         res.status(501).json({ errorMessage: err.message });
